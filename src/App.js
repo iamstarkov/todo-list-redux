@@ -30,13 +30,15 @@ class App extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { todos: state.todos };
+  return {
+    todos: state.todos
+  };
 };
 const mapDispatchToProps = (dispatch) => ({
-  onAddTodo(data) {
+  onAddTodo(todo) {
     dispatch({
       type: "ADD_TODO",
-      data: data
+      todo: todo
     })
   }
 })
