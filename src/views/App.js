@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import TodosList from './components/todos-list';
-import Filters from './components/filters';
+import TodosList from './todos-list';
+import Filters from './filters';
 import { connect } from 'react-redux';
 
 let currentId = 0;
