@@ -1,18 +1,9 @@
-const filters = (state=[], action) => {
-  console.log(action);
+const filter = (state = 'SHOW_ALL', action) => {
   switch(action.type) {
-    case 'SHOW_ALL' :
-      return state;
-    case 'SHOW_ACTIVE' :
-      return action.todos.filter(
-        todo => !todo.completed
-      );
-    case 'SHOW_COMPLETED' :
-      return action.todos.filter(
-        todo => todo.completed
-      );
+    case 'CHANGE_FILTER' :
+      return action.filter;
     default:
       return state
   }
 };
-export default filters;
+export default filter;

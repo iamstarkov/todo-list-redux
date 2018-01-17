@@ -11,11 +11,12 @@ class App extends Component {
     let inputValue = this.input.value;
     if(!inputValue) return;
 
-    this.props.onAddTodo({
-        value: inputValue,
-        id: currentId++,
-        completed: false
-      });
+    let newTodo = {
+      value: inputValue,
+      id: currentId++,
+      completed: false
+    };
+    this.props.onAddTodo(newTodo);
     this.input.value = '';
   }
   render() {
@@ -38,7 +39,7 @@ const mapDispatchToProps = (dispatch) => ({
   onAddTodo(todo) {
     dispatch({
       type: "ADD_TODO",
-      todo: todo
+      todos: todo
     })
   }
 })

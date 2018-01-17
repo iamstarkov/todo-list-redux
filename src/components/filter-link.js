@@ -1,13 +1,15 @@
 import React from 'react';
 import {connect} from "react-redux";
 
-const FilterLink = (props) => (
-  <li onClick={() => props.onClickFilter(props.show)}>{props.children}</li>
+const FilterLink = ({ children, filter, onClickFilter, filterState}) => (
+  <li onClick={() => onClickFilter(filter)}
+      style={{color: filter === filterState ? 'red' : 'black'}}
+  >{children}</li>
 );
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    filterState: state.filter
   };
 };
 const mapDispatchToProps = (dispatch) => ({

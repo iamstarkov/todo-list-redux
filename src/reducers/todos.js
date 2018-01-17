@@ -3,7 +3,7 @@ const todos = (state=[], action) => {
     case 'ADD_TODO' :
       return [
         ...state,
-        action.todo
+        action.todos
       ];
     case 'TOGGLE_TODO' :
       return state.map(t => {
