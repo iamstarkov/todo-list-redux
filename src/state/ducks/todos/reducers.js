@@ -1,8 +1,13 @@
-import { combineReducers } from 'redux';
 import * as types from "./";
+import PropTypes from 'prop-types';
 
-const todoReducer = (state = [], action ) => {
-  console.log(types);
+export const NAMESPACE = 'todos';
+
+const initialState = [];
+const shape = PropTypes.array;
+
+
+const todoReducer = (state = initialState, action) => {
   switch( action.type ) {
     case types.ADD_TODO:
       return [
@@ -10,20 +15,19 @@ const todoReducer = (state = [], action ) => {
         action.payload
       ];
     case types.TOGGLE_TODO :
-      return state.map(t => {
-        if(action.id === t.id) t.completed = !t.completed;
-        return t;
+      return state.map(t => ({
+        ...t,
+        completed: action.id === t.id ? !t.completed : t.completed
       });
     default:
       return state;
   }
-}
+};
 
-const reducer = combineReducers({
-  todoReducer,
-
-});
-
-export reducer;
+export default {
+  initialState,
+  shape,
+  reducer: { NAMESPACE: todoReducer },
+};
 
 
