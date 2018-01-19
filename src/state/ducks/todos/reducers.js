@@ -1,13 +1,9 @@
 import * as types from "./";
-import PropTypes from 'prop-types';
+import defaultState from './';
 
 export const NAMESPACE = 'todos';
 
-const initialState = [];
-const shape = PropTypes.array;
-
-
-const todoReducer = (state = initialState, action) => {
+const todoReducer = (state = defaultState, action) => {
   switch( action.type ) {
     case types.ADD_TODO:
       return [
@@ -23,11 +19,6 @@ const todoReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default {
-  initialState,
-  shape,
-  reducer: { NAMESPACE: todoReducer },
-};
+export const reducer: { NAMESPACE: todoReducer }
 
 

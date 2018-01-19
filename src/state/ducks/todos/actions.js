@@ -10,7 +10,7 @@ const toggleTodo = todo => ({
   payload: todo
 });
 
-export {
+export const actions = {
   addTodo,
   toggleTodo
 }

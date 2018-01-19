@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterLink from './filter-link';
+import FilterLink from '../filter-link/filter-link';
 
 const Filters = () => (
   <ul>
