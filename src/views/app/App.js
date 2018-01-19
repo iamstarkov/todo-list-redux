@@ -36,14 +36,9 @@ const mapStateToProps = (state) => {
     todos: todos.selectors.root(state)
   };
 };
-const mapDispatchToProps = (dispatch) => ({
-  onToggleTodo(id) {
-    dispatch({
-      type: "TOGGLE_TODO",
-      id: id
-    })
-  }
-});
+const mapDispatchToProps = {
+  onAddTodo: todos.actions.addTodo
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
