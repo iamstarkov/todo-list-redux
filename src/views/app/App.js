@@ -3,9 +3,11 @@ import './App.css';
 import TodosList from './../todos-list/todos-list';
 import Filters from './../filters/filters';
 import { connect } from 'react-redux';
+import todosDuck from './../../state/ducks/todos';
+
+console.log(todosDuck);
 
 let currentId = 0;
-
 class App extends Component {
   addTodo() {
     let inputValue = this.input.value;
@@ -35,14 +37,9 @@ const mapStateToProps = state => {
     todos: state.todos
   };
 };
-const mapDispatchToProps = (dispatch) => ({
-  onAddTodo(todo) {
-    dispatch({
-      type: "ADD_TODO",
-      todos: todo
-    })
-  }
-})
+const mapDispatchToProps = {
+  addTodo: todosDuck.actions
+}
 export default connect(
   mapStateToProps,
   mapDispatchToProps

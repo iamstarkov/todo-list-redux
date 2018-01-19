@@ -1,7 +1,6 @@
-import defaultState from './';
+import defaultState from './defaultState';
 const root = state => state.todos || defaultState;
 
-
-export const selectors = {
+export {
   root,
 };
