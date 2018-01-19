@@ -1,5 +1,14 @@
-export { default as actions } from './actions';
-export { default as selectors } from './selectors';
-export { default as defaultState } from './defaultState';
-export { default as shape } from './shape';
-export { default as reducer } from './reducers';
+import * as actions from './actions';
+import * as selectors from './selectors';
+import defaultState from './defaultState';
+import * as shape from './shape';
+import * as reducer from './reducers';
+import { NAMESPACE } from "./types";
+
+export const todos = {
+  actions,
+  selectors,
+  defaultState,
+  shape,
+  reducer: { [NAMESPACE]: reducer },
+};

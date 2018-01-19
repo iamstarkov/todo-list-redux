@@ -1,7 +1,10 @@
-const ADD_TODO = 'ADD_TODO';
-const TOGGLE_TODO = 'TOGGLE_TODO';
+const NAMESPACE = 'todos';
 
-export  {
-  ADD_TODO,
-  TOGGLE_TODO
+const types = {
+  ADD_TODO: `${NAMESPACE}/ADD`,
+  TOGGLE_TODO: `${NAMESPACE}/TOGGLE`
 }
+export {
+  types,
+  NAMESPACE
+};

@@ -1,4 +1,4 @@
-import * as types from "./types";
+import { types } from "./types";
 import defaultState from './defaultState';
 
 const todoReducer = (state = defaultState, action) => {
@@ -17,7 +17,8 @@ const todoReducer = (state = defaultState, action) => {
       return state;
   }
 };
-export default todoReducer;
-
+export {
+  todoReducer
+}
 
 

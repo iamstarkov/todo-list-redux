@@ -1,21 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-const filterTodos = (todos, filter) => {
-  switch (filter) {
-    case 'SHOW_ALL':
-      return todos;
-    case 'SHOW_COMPLETED':
-      return todos.filter(
-        t => t.completed
-      );
-    case 'SHOW_ACTIVE' :
-      return todos.filter(
-        t => !t.completed
-      );
-    default: return todos;
-  }
-}
+import { todos } from './../../state/ducks/todos';
 
 const TodosList = (props) => {
   return (
@@ -28,10 +13,9 @@ const TodosList = (props) => {
     </ul>
   )
 }
-  ;
 const mapStateToProps = (state) => {
   return {
-    todos: filterTodos(state.todos, state.filter)
+    todos: todos.selectors.root(state)
   };
 };
 const mapDispatchToProps = (dispatch) => ({

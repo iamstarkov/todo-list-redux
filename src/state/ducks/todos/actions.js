@@ -1,4 +1,4 @@
-import * as types from "./";
+import { types } from "./types";
 
 const addTodo = todos => ({
   type: types.ADD_TODO,

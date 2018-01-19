@@ -3,9 +3,8 @@ import './App.css';
 import TodosList from './../todos-list/todos-list';
 import Filters from './../filters/filters';
 import { connect } from 'react-redux';
-import todosDuck from './../../state/ducks/todos';
+import { todos } from './../../state/ducks/todos';
 
-console.log(todosDuck);
 
 let currentId = 0;
 class App extends Component {
@@ -32,14 +31,19 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    todos: todos.selectors.root(state)
   };
 };
-const mapDispatchToProps = {
-  addTodo: todosDuck.actions
-}
+const mapDispatchToProps = (dispatch) => ({
+  onToggleTodo(id) {
+    dispatch({
+      type: "TOGGLE_TODO",
+      id: id
+    })
+  }
+});
 export default connect(
   mapStateToProps,
   mapDispatchToProps
