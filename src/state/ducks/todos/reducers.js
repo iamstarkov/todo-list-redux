@@ -1,7 +1,5 @@
-import * as types from "./";
-import defaultState from './';
-
-export const NAMESPACE = 'todos';
+import * as types from "./types";
+import defaultState from './defaultState';
 
 const todoReducer = (state = defaultState, action) => {
   switch( action.type ) {
@@ -14,11 +12,12 @@ const todoReducer = (state = defaultState, action) => {
       return state.map(t => ({
         ...t,
         completed: action.id === t.id ? !t.completed : t.completed
-      });
+      }));
     default:
       return state;
   }
 };
-export const reducer: { NAMESPACE: todoReducer }
+export default todoReducer;
+
 
 

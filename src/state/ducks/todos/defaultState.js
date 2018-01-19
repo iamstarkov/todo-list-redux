@@ -1,1 +1,2 @@
-export const defaultState = [];
+const defaultState = [];
+export default defaultState;
