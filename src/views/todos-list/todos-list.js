@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { todos } from './../../state/ducks/todos';
+import * as todos from './../../state/ducks/todos';
 
 const TodosList = (props) => {
   return (

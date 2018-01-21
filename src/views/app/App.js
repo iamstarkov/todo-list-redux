@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import TodosList from './../todos-list/todos-list';
-import Filters from './../filters/filters';
 import { connect } from 'react-redux';
-import { todos } from './../../state/ducks/todos';
+import todos from './../../state/ducks/todos';
 
 
 let currentId = 0;
@@ -25,8 +23,7 @@ class App extends Component {
       <div className="App">
         <input type="text" ref={input => this.input = input} />
         <button onClick={this.addTodo.bind(this)}>Add todo</button>
-        <TodosList/>
-        <Filters/>
+
       </div>
     );
   }
