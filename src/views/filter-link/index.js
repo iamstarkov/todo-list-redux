@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {filtersDuck, todosDuck} from '../../ducks';
+import { todosDuck } from '../../ducks';
 
 
 
@@ -27,11 +27,11 @@ FilterLink.propTypes = {
 
 const mapStateToProps = state => ({
   filteredTodos: todosDuck.selectors.getFilteredTodos(state),
-  currentFilter: filtersDuck.selectors.root(state),
+  currentFilter: todosDuck.selectors.rootFilters(state),
 });
 
 const mapDispatchToProps = {
-  onFilter: filtersDuck.actions.filterTodos,
+  onFilter: todosDuck.actions.filterTodos,
 };
 export default connect(
   mapStateToProps,

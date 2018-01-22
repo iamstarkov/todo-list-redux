@@ -2,12 +2,16 @@ import PropTypes from 'prop-types';
 
 export const NAMESPACE = 'todos';
 
-const defaultState = [];
-const shape = PropTypes.array;
+const defaultState = {
+  todos: [],
+  filters: 'SHOW_ALL',
+};
+const shape = PropTypes.object;
 
 const types = {
     ADD_TODO: `${NAMESPACE}/ADD`,
     TOGGLE_TODO: `${NAMESPACE}/TOGGLE`,
+    CHANGE_FILTER: `${NAMESPACE}/FILTER`,
 };
 
 const addTodo = todos => ({
@@ -18,52 +22,79 @@ const toggleTodo = todo => ({
     type: types.TOGGLE_TODO,
     payload: todo
 });
+const filterTodos = filter => ({
+  type: types.CHANGE_FILTER,
+  payload: filter
+});
+
 export const actions = {
     addTodo,
-    toggleTodo
+    toggleTodo,
+    filterTodos
 };
 
-export function reducer(state = defaultState, { type, payload }) {
-    switch (type) {
-        case types.ADD_TODO:
-            return [payload, ...state];
-        case types.TOGGLE_TODO:
-            return state.map(t => ({
-                ...t,
-                completed: payload.id === t.id ? !t.completed : t.completed
-            }));
-        default:
-            return state;
-    }
-}
-
-const root = state => state[NAMESPACE] || defaultState;
+const rootTodos = state => state[NAMESPACE] || defaultState[NAMESPACE];
+const rootFilters = state => state.filters || defaultState.filters;
 
 const getFilteredTodos = state => {
-  switch (state.filters) {
+  switch (rootFilters(state)) {
     case 'SHOW_ALL':
-      return state.todos;
+      return rootTodos(state);
     case 'SHOW_COMPLETED':
-      return state.todos.filter(
+      return rootTodos(state).filter(
         t => t.completed
       );
     case 'SHOW_ACTIVE':
-      return state.todos.filter(
+      return rootTodos(state).filter(
         t => !t.completed
       );
-    default: return state.todos;
+    default: return rootTodos(state);
   }
 };
 
 export const selectors = {
-    root,
+    rootTodos,
+    rootFilters,
     getFilteredTodos,
 };
+export function reducerTodos(state = defaultState.todos, { type, payload }) {
+  switch (type) {
+    case types.ADD_TODO:
+      return {
+        ...state,
+        todos: [payload, ...rootTodos(state)]
+      };
+    case types.TOGGLE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map(t => ({
+          ...t,
+          completed: payload.id === t.id ? !t.completed : t.completed
+        })),
+      };
+    default:
+      return state.todos;
+  }
+}
+export function reducerFilters(state = defaultState.filters, { type, payload }) {
+  switch (type) {
+    case types.CHANGE_FILTER:
+      return {
+        ...state,
+        filters: payload,
+      };
+    default:
+      return state.filters;
+  }
+}
 
 export default {
     actions,
     selectors,
     defaultState,
     shape,
-    reducer: { [NAMESPACE]: reducer },
+    reducer: {
+      [NAMESPACE]: reducerTodos,
+      filters: reducerFilters
+    },
 };
