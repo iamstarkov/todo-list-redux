@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles.css';
 import { connect } from 'react-redux';
-import todos from './../../state/ducks/todos';
-
+import { todosDuck } from './../../state/ducks';
+import TodosList from './../todos-list';
 
 let currentId = 0;
 class App extends Component {
@@ -23,19 +23,19 @@ class App extends Component {
       <div className="App">
         <input type="text" ref={input => this.input = input} />
         <button onClick={this.addTodo.bind(this)}>Add todo</button>
-
+        <TodosList todos={this.props.todos} />
       </div>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    todos: todos.selectors.root(state)
-  };
-};
+
+const mapStateToProps = state => ({
+  todos: todosDuck.selectors.root(state),
+});
 const mapDispatchToProps = {
-  onAddTodo: todos.actions.addTodo
+  onAddTodo: todosDuck.actions.addTodo
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
