@@ -9,7 +9,6 @@ import registerServiceWorker from './registerServiceWorker';
 import * as ducks from './ducks';
 
 
-console.log(ducks);
 export const reducer =  combineReducers({
   ...ducks.todosDuck.reducer,
 });

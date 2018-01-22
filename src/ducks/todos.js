@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 
-export const NAMESPACE = 'todos';
+export const NS_ROOT = 'todos';
+export const NS_ITEMS = 'items';
+export const NS_FILTERING = 'filtering';
 
 const defaultState = {
-  todos: [],
-  filters: 'SHOW_ALL',
+  [NS_ROOT]: [],
+  [NS_FILTERING]: 'SHOW_ALL',
 };
 const shape = PropTypes.object;
 
@@ -33,36 +35,37 @@ export const actions = {
     filterTodos
 };
 
-const rootTodos = state => state[NAMESPACE] || defaultState[NAMESPACE];
-const rootFilters = state => state.filters || defaultState.filters;
+const selectorRoot = state => state[NS_ROOT] || defaultState;
+const selectorItems = state => selectorRoot(state)[NS_ITEMS] || defaultState[NS_ITEMS];
+const selectorFiltering = state => selectorRoot(state)[NS_FILTERING] || defaultState[NS_FILTERING];
 
 const getFilteredTodos = state => {
-  switch (rootFilters(state)) {
+  switch (selectorRoot(state)) {
     case 'SHOW_ALL':
-      return rootTodos(state);
+      return selectorRoot(state);
     case 'SHOW_COMPLETED':
-      return rootTodos(state).filter(
+      return selectorRoot(state).filter(
         t => t.completed
       );
     case 'SHOW_ACTIVE':
-      return rootTodos(state).filter(
+      return selectorRoot(state).filter(
         t => !t.completed
       );
-    default: return rootTodos(state);
+    default: return selectorRoot(state);
   }
 };
 
 export const selectors = {
-    rootTodos,
-    rootFilters,
-    getFilteredTodos,
+  root: selectorsRoot,
+  items: selectorItems,
+  filtering: selectorsFiltering,
 };
 export function reducerTodos(state = defaultState.todos, { type, payload }) {
   switch (type) {
     case types.ADD_TODO:
       return {
         ...state,
-        todos: [payload, ...rootTodos(state)]
+        todos: [payload, ...root(state)]
       };
     case types.TOGGLE_TODO:
       return {
