@@ -37,10 +37,27 @@ export function reducer(state = defaultState, { type, payload }) {
     }
 }
 
-const root = state => state.todos || defaultState;
+const root = state => state[NAMESPACE] || defaultState;
+
+const getFilteredTodos = state => {
+  switch (state.filters) {
+    case 'SHOW_ALL':
+      return state.todos;
+    case 'SHOW_COMPLETED':
+      return state.todos.filter(
+        t => t.completed
+      );
+    case 'SHOW_ACTIVE':
+      return state.todos.filter(
+        t => !t.completed
+      );
+    default: return state.todos;
+  }
+};
 
 export const selectors = {
     root,
+    getFilteredTodos,
 };
 
 export default {

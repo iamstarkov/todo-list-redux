@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { todosDuck } from './../../state/ducks';
+import { todosDuck } from '../../ducks';
 
 const TodosList = (props) => {
   return (
@@ -14,7 +14,7 @@ const TodosList = (props) => {
   )
 };
 const mapStateToProps = state => ({
-  todos: todosDuck.selectors.root(state),
+  todos: todosDuck.selectors.getFilteredTodos(state),
 });
 const mapDispatchToProps = {
   toggleTodo: todosDuck.actions.toggleTodo,

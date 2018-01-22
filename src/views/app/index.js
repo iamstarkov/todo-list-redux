@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './styles.css';
 import { connect } from 'react-redux';
-import { todosDuck } from './../../state/ducks';
-import TodosList from './../todos-list';
+import PropTypes from 'prop-types';
+import { todosDuck } from '../../ducks';
+import { TodosList, Filters } from  './..';
 
 let currentId = 0;
 class App extends Component {
@@ -23,14 +24,19 @@ class App extends Component {
       <div className="App">
         <input type="text" ref={input => this.input = input} />
         <button onClick={this.addTodo.bind(this)}>Add todo</button>
-        <TodosList todos={this.props.todos} />
+        <TodosList />
+        <Filters />
       </div>
     );
   }
 }
+App.propTypes = {
+  todos: PropTypes.array.isRequired,
+  onAddTodo: PropTypes.func.isRequired,
+}
 
 const mapStateToProps = state => ({
-  todos: todosDuck.selectors.root(state),
+  todos: todosDuck.selectors.getFilteredTodos(state),
 });
 const mapDispatchToProps = {
   onAddTodo: todosDuck.actions.addTodo
