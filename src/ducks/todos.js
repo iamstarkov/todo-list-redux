@@ -33,7 +33,7 @@ const filterTodos = filter => ({
 export const actions = {
   addTodo,
   toggleTodo,
-  filterTodos
+  filterTodos,
 };
 
 const selectorRoot = state => state[NS_ROOT] || defaultState;

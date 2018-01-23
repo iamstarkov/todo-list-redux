@@ -3,8 +3,6 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import { todosDuck } from '../../ducks';
 
-
-
 const FilterLink = props => {
   return (
     <ul>
@@ -21,12 +19,11 @@ const FilterLink = props => {
   )
 };
 FilterLink.propTypes = {
-  filteredTodos: PropTypes.array.isRequired,
+  currentFilter: PropTypes.string.isRequired,
   onFilter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  filteredTodos: todosDuck.selectors.getFilteredTodos(state),
   currentFilter: todosDuck.selectors.filtering(state),
 });
 
