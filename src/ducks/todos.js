@@ -65,29 +65,20 @@ export const selectors = {
 const reducerItems = (state = defaultState, { type, payload }) => {
   switch (type) {
     case types.ADD_TODO:
-      return {
-        ...selectorRoot(state),
-        [NS_ITEMS]: [payload, ...selectorItems(state)]
-      };
+      return [payload, ...state];
     case types.TOGGLE_TODO:
-      return {
-        ...selectorRoot(state),
-        [NS_ITEMS]: selectorItems(state).map(t => ({
-          ...t,
-          completed: payload.id === t.id ? !t.completed : t.completed
-        })),
-      };
+      return state.map(t => ({
+        ...t,
+        completed: payload.id === t.id ? !t.completed : t.completed
+      }));
     default:
-      return selectorRoot(state);
+      return selectorItems(state);
   }
 };
 const reducerFiltering = (state = defaultState, { type, payload }) => {
   switch (type) {
     case types.CHANGE_FILTER:
-      return {
-        ...state,
-        [NS_FILTERING]: payload,
-      };
+      return payload;
     default:
       return selectorFiltering(state);
   }

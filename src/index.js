@@ -8,7 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import * as ducks from './ducks';
 
 export const reducer =  combineReducers({
-  ...ducks.todosDuck.reducer.todos,
+  ...ducks.todosDuck.reducer,
 });
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
