@@ -27,7 +27,7 @@ FilterLink.propTypes = {
 
 const mapStateToProps = state => ({
   filteredTodos: todosDuck.selectors.getFilteredTodos(state),
-  currentFilter: todosDuck.selectors.rootFilters(state),
+  currentFilter: todosDuck.selectors.filtering(state),
 });
 
 const mapDispatchToProps = {
