@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { todosDuck } from '../../ducks';
 const TodosList = (props) => {
+  console.log(props.todos);
   return (
     <ul>
       {props.todos.map(t => (

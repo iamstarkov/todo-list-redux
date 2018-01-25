@@ -19,15 +19,15 @@ const types = {
 
 const addTodo = todos => ({
   type: types.ADD_TODO,
-  payload: todos
+  payload: todos,
 });
 const toggleTodo = todo => ({
   type: types.TOGGLE_TODO,
-  payload: todo
+  payload: todo,
 });
 const filterTodos = filter => ({
   type: types.CHANGE_FILTER,
-  payload: filter
+  payload: filter,
 });
 
 export const actions = {
@@ -52,7 +52,7 @@ const getFilteredTodos = state => {
       return selectorItems(state).filter(
         t => !t.completed
       );
-    default: return selectorItems(state);
+    default: selectorRoot(state);
   }
 };
 
@@ -62,7 +62,7 @@ export const selectors = {
   filtering: selectorFiltering,
   getFilteredTodos,
 };
-const reducerItems = (state = defaultState, { type, payload }) => {
+const reducerItems = (state = defaultState[NS_ITEMS], { type, payload }) => {
   switch (type) {
     case types.ADD_TODO:
       return [payload, ...state];
@@ -72,15 +72,15 @@ const reducerItems = (state = defaultState, { type, payload }) => {
         completed: payload.id === t.id ? !t.completed : t.completed
       }));
     default:
-      return selectorItems(state);
+      return state;
   }
 };
-const reducerFiltering = (state = defaultState, { type, payload }) => {
+const reducerFiltering = (state = defaultState[NS_FILTERING], { type, payload }) => {
   switch (type) {
     case types.CHANGE_FILTER:
       return payload;
     default:
-      return selectorFiltering(state);
+      return state;
   }
 };
 export const rootReducer =  combineReducers({
@@ -92,5 +92,5 @@ export default {
     selectors,
     defaultState,
     shape,
-    reducer: { [NS_ROOT]: rootReducer }
+    reducer: { [NS_ROOT]: rootReducer },
 };

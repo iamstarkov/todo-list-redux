@@ -33,7 +33,7 @@ class App extends Component {
 App.propTypes = {
   todos: PropTypes.array.isRequired,
   onAddTodo: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = state => ({
   todos: todosDuck.selectors.getFilteredTodos(state),
