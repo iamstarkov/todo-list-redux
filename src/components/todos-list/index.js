@@ -20,7 +20,7 @@ TodosList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  todos: todosDuck.selectors.getFilteredTodos(state),
+  todos: todosDuck.selectors.filteredTodos(state),
 });
 const mapDispatchToProps = {
   onToggleTodo: todosDuck.actions.toggleTodo,

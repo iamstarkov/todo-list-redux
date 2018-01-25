@@ -36,7 +36,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  todos: todosDuck.selectors.getFilteredTodos(state),
+  todos: todosDuck.selectors.filteredTodos(state),
 });
 const mapDispatchToProps = {
   onAddTodo: todosDuck.actions.addTodo
@@ -46,7 +46,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
-
-
-
-
